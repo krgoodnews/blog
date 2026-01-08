@@ -1,6 +1,6 @@
 ---
 title: 재택 HACKS
-cover: ./images/book_cover_재택-HACKS.jpg
+cover: /books/images/book_cover_재택-HACKS.jpg
 emoji: 💼
 year: 2021
 modified: 2021-01-06
@@ -9,8 +9,5 @@ tags:
   - 자기개발
 ---
 
+![재택 HACKS 커버](/books/images/book_cover_재택-HACKS.jpg)
 
-
-## 독후감
-
-여기에 독후감을 작성하세요.
