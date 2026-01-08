@@ -2,6 +2,7 @@ import { QuartzComponent, QuartzComponentConstructor, QuartzComponentProps } fro
 
 import style from "../styles/listPage.scss"
 import { PageList, SortFn } from "../PageList"
+import { BookGallery } from "../BookGallery"
 import { Root } from "hast"
 import { htmlToJsx } from "../../util/jsx"
 import { i18n } from "../../i18n"
@@ -102,25 +103,35 @@ export default ((opts?: Partial<FolderContentOptions>) => {
         : htmlToJsx(fileData.filePath!, tree)
     ) as ComponentChildren
 
+    // books 폴더이거나 cssclasses에 "books-gallery"가 있으면 BookGallery 사용
+    const isBooksFolder = fileData.slug?.startsWith("books/") || fileData.slug === "books"
+    const useBookGallery = isBooksFolder || cssClasses.includes("books-gallery")
+
     return (
       <div class="popover-hint">
         <article class={classes}>{content}</article>
         <div class="page-listing">
-          {options.showFolderCount && (
-            <p>
-              {i18n(cfg.locale).pages.folderContent.itemsUnderFolder({
-                count: allPagesInFolder.length,
-              })}
-            </p>
+          {useBookGallery ? (
+            <BookGallery {...listProps} />
+          ) : (
+            <>
+              {options.showFolderCount && (
+                <p>
+                  {i18n(cfg.locale).pages.folderContent.itemsUnderFolder({
+                    count: allPagesInFolder.length,
+                  })}
+                </p>
+              )}
+              <div>
+                <PageList {...listProps} />
+              </div>
+            </>
           )}
-          <div>
-            <PageList {...listProps} />
-          </div>
         </div>
       </div>
     )
   }
 
-  FolderContent.css = concatenateResources(style, PageList.css)
+  FolderContent.css = concatenateResources(style, PageList.css, BookGallery.css)
   return FolderContent
 }) satisfies QuartzComponentConstructor
