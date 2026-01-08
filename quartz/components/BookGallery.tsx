@@ -3,9 +3,22 @@ import { resolveRelative } from "../util/path"
 import { QuartzPluginData } from "../plugins/vfile"
 import { getDate, Date as DateComponent } from "./Date"
 
-// 책 정렬 함수: 연도(최신순) -> 제목(가나다순)
+// 책 정렬 함수: 날짜(최신순) -> 연도(최신순) -> 제목(가나다순)
 function sortBooks(cfg: any): (f1: QuartzPluginData, f2: QuartzPluginData) => number {
   return (f1, f2) => {
+    // 0. 날짜가 있으면 날짜로 정렬 (최신순) - CSV 순서가 날짜에 반영됨
+    if (f1.dates && f2.dates) {
+      const date1 = getDate(cfg, f1)!
+      const date2 = getDate(cfg, f2)!
+      if (date1.getTime() !== date2.getTime()) {
+        return date2.getTime() - date1.getTime() // 최신순
+      }
+    } else if (f1.dates && !f2.dates) {
+      return -1
+    } else if (!f1.dates && f2.dates) {
+      return 1
+    }
+    
     // 1. 연도가 있으면 연도로 정렬 (최신순)
     const year1 = f1.frontmatter?.year
     const year2 = f2.frontmatter?.year
@@ -52,20 +65,7 @@ function sortBooks(cfg: any): (f1: QuartzPluginData, f2: QuartzPluginData) => nu
       return 1
     }
     
-    // 2. 날짜가 있으면 날짜로 정렬 (최신순)
-    if (f1.dates && f2.dates) {
-      const date1 = getDate(cfg, f1)!
-      const date2 = getDate(cfg, f2)!
-      if (date1.getTime() !== date2.getTime()) {
-        return date2.getTime() - date1.getTime() // 최신순
-      }
-    } else if (f1.dates && !f2.dates) {
-      return -1
-    } else if (!f1.dates && f2.dates) {
-      return 1
-    }
-    
-    // 3. 제목으로 정렬 (가나다순)
+    // 2. 제목으로 정렬 (가나다순)
     const title1 = f1.frontmatter?.title?.toLowerCase() ?? ""
     const title2 = f2.frontmatter?.title?.toLowerCase() ?? ""
     return title1.localeCompare(title2, 'ko')
