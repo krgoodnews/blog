@@ -8,5 +8,7 @@ tags:
   - 소프트웨어
 ---
 
-![Clean Code 커버](/books/images/book_cover_Clean-Code.jpeg)
+<p>
+<img width="320" src="/books/images/book_cover_Clean-Code.jpeg" />
+</p>
 

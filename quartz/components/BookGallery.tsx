@@ -178,7 +178,7 @@ BookGallery.css = `
     width: 100%;
     aspect-ratio: 2 / 3;
     margin-bottom: 0.75rem;
-    border-radius: 4px;
+    border-radius:12px;
     overflow: hidden;
     background: var(--lightgray);
     position: relative;
@@ -188,6 +188,7 @@ BookGallery.css = `
       height: 100%;
       object-fit: cover;
       transition: transform 0.3s ease;
+      margin: 0 auto;
     }
 
     .book-cover-placeholder {

@@ -9,7 +9,9 @@ tags:
   - 소프트웨어
 ---
 
-![Peopleware 커버](/books/images/book_cover_Peopleware.jpg)
+<p>
+<img width="320" src="/books/images/book_cover_Peopleware.jpg" />
+</p>
 
 소프트웨어 개발도 결국 사람이 하는 일이다.
 

@@ -9,5 +9,7 @@ tags:
   - 자기개발
 ---
 
-![재택 HACKS 커버](/books/images/book_cover_재택-HACKS.jpg)
+<p>
+<img width="320" src="/books/images/book_cover_재택-HACKS.jpg" />
+</p>
 
