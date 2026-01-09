@@ -1,5 +1,6 @@
 ---
 title: "게으름을 위한 부지런함"
+cover: static/cover.png
 ---
 
 # 공학도 출신답게 살아보자 🛠️

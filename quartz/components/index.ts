@@ -24,6 +24,7 @@ import Comments from "./Comments"
 import Flex from "./Flex"
 import ConditionalRender from "./ConditionalRender"
 import { BookGallery } from "./BookGallery"
+import CoverImage from "./CoverImage"
 
 export {
   ArticleTitle,
@@ -52,4 +53,5 @@ export {
   Flex,
   ConditionalRender,
   BookGallery,
+  CoverImage,
 }
