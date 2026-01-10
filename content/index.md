@@ -12,7 +12,6 @@ cover: static/cover.png
 # iOS 
 
 - [[summer-was-ios-app|'여름이었다' iOS App]]
-- [[creating-fluid-layout|유려한 레이아웃을 만들어요]]
 - [[ITMS-90713-assets-xcassets-preview-content|ITMS-90713: Assets.xcassets는 Preview Content 디렉토리에 넣지 마라]]
 
 # 회고 🖋
