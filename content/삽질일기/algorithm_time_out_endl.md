@@ -1,5 +1,5 @@
 ---
-title: 알고리즘은 맞는데 왜 시간 초과일까? (endl vs 개행문자)
+title: 알고리즘은 맞는데 왜 시간 초과일까? (endl vs "\n")
 date: 2026-01-15
 tags:
   - Algorithm
