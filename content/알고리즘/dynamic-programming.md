@@ -1,6 +1,6 @@
 ---
 title: "동적 프로그래밍 (Dynamic Programming)"
-date: 2026-01-16
+date: 2026-01-17
 tags: [Algorithm, Python, Dynamic Programming]
 ---
 
