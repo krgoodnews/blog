@@ -60,9 +60,17 @@ const defaultOptions: GraphOptions = {
 }
 
 export default ((opts?: Partial<GraphOptions>) => {
-  const Graph: QuartzComponent = ({ displayClass, cfg }: QuartzComponentProps) => {
+  const Graph: QuartzComponent = ({ displayClass, cfg, fileData }: QuartzComponentProps) => {
     const localGraph = { ...defaultOptions.localGraph, ...opts?.localGraph }
     const globalGraph = { ...defaultOptions.globalGraph, ...opts?.globalGraph }
+    
+    // index 페이지일 때는 전체 그래프를 표시
+    if (fileData.slug === "index") {
+      localGraph.depth = -1
+      localGraph.scale = globalGraph.scale ?? 0.9
+      localGraph.enableRadial = globalGraph.enableRadial ?? true
+    }
+    
     return (
       <div class={classNames(displayClass, "graph")}>
         <h3>{i18n(cfg.locale).components.graph.title}</h3>
