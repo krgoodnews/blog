@@ -225,6 +225,77 @@ def bfs_by_level(graph, start, visited):
 
 2D 그리드에서 최단 경로를 찾는 문제에 활용됩니다.
 
+### 5. 다중 시작점 BFS
+
+여러 개의 시작점에서 동시에 BFS를 시작할 수 있습니다. 모든 시작점을 큐에 먼저 넣고 시작하면 됩니다.
+
+```python
+from collections import deque
+
+def multi_start_bfs(grid, starts):
+    queue = deque([])
+    
+    # 모든 시작점을 큐에 추가
+    for start in starts:
+        queue.append(start)
+        grid[start[0]][start[1]] = 1  # 시작점 표시
+    
+    offset = [(-1, 0), (1, 0), (0, -1), (0, 1)]
+    
+    while queue:
+        y, x = queue.popleft()
+        value = grid[y][x]
+        
+        for dy, dx in offset:
+            ny = y + dy
+            nx = x + dx
+            
+            if 0 <= ny < n and 0 <= nx < m:
+                if grid[ny][nx] == 0:  # 아직 방문하지 않은 곳
+                    grid[ny][nx] = value + 1
+                    queue.append((ny, nx))
+```
+
+**활용 예시:**
+- 토마토 문제: 여러 개의 익은 토마토에서 동시에 퍼져나가는 경우
+- 최단 거리: 여러 목표 지점 중 가장 가까운 곳 찾기
+
+### 6. 2D 그리드 BFS
+
+2차원 그리드에서 BFS를 사용할 때는 상하좌우(또는 8방향) 이동을 고려합니다.
+
+```python
+from collections import deque
+
+def bfs_2d_grid(grid, start_y, start_x, n, m):
+    queue = deque([(start_y, start_x)])
+    visited = [[False] * m for _ in range(n)]
+    visited[start_y][start_x] = True
+    
+    # 상하좌우 방향
+    offset = [(-1, 0), (1, 0), (0, -1), (0, 1)]
+    
+    while queue:
+        y, x = queue.popleft()
+        
+        for dy, dx in offset:
+            ny = y + dy
+            nx = x + dx
+            
+            # 범위 체크
+            if 0 <= ny < n and 0 <= nx < m:
+                # 방문 가능한 곳이고 아직 방문하지 않았으면
+                if grid[ny][nx] == 1 and not visited[ny][nx]:
+                    visited[ny][nx] = True
+                    grid[ny][nx] = grid[y][x] + 1  # 거리 저장
+                    queue.append((ny, nx))
+```
+
+**주의사항:**
+- 그리드 좌표는 `(y, x)` 순서로 주어지는 경우가 많음
+- 인덱스 범위 체크 필수: `0 <= y < n and 0 <= x < m`
+- 방문 표시와 거리 저장을 동시에 처리할 수 있음
+
 ---
 
 ## BFS vs DFS 비교
@@ -295,3 +366,7 @@ for node in graph:
 
 - [[dfs-algorithm|DFS (깊이 우선 탐색)]]
 - [[boj-1260|BOJ 1260: DFS와 BFS]] - DFS와 BFS를 함께 구현하는 문제
+- [[boj-7576|BOJ 7576: 토마토]] - 다중 시작점 BFS를 활용하는 문제
+- [[boj-2178|BOJ 2178: 미로 탐색]] - 2D 그리드에서 BFS를 활용하는 문제
+- [[boj-14940|BOJ 14940: 쉬운 최단거리]] - 2D 그리드에서 최단 거리를 구하는 문제
+- [[boj-1697|BOJ 1697: 숨바꼭질]] - 1D 그래프에서 BFS를 활용하는 문제

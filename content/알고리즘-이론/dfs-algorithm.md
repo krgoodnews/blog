@@ -211,6 +211,44 @@ def has_cycle(graph, v, visited, parent):
 - 스도쿠 풀이
 - 미로 찾기
 
+### 5. 트리 탐색
+
+트리는 사이클이 없는 그래프이므로 DFS를 사용하여 탐색할 수 있습니다. 트리에서 DFS를 사용하면 부모-자식 관계를 쉽게 파악할 수 있습니다.
+
+```python
+def dfs_tree(graph, v, visited, parent):
+    visited[v] = True
+    parent[v] = current_parent  # 부모 정보 저장
+    
+    for neighbor in graph[v]:
+        if not visited[neighbor]:
+            dfs_tree(graph, neighbor, visited, v)  # 현재 노드를 부모로 전달
+```
+
+**트리 탐색의 특징:**
+- 각 노드는 정확히 하나의 부모를 가짐 (루트 제외)
+- 방문한 노드를 다시 방문하지 않으므로 `parent` 체크만으로 충분
+- 스택을 사용한 반복 구현도 가능
+
+```python
+def dfs_tree_stack(graph, start, n):
+    stack = [start]
+    visited = [False] * (n + 1)
+    parent = [0] * (n + 1)
+    visited[start] = True
+    
+    while stack:
+        v = stack.pop()
+        
+        for neighbor in graph[v]:
+            if not visited[neighbor]:
+                visited[neighbor] = True
+                parent[neighbor] = v
+                stack.append(neighbor)
+    
+    return parent
+```
+
 ---
 
 ## DFS vs BFS 비교
@@ -260,3 +298,4 @@ for node in graph:
 
 - [[bfs-algorithm|BFS (너비 우선 탐색)]]
 - [[boj-1260|BOJ 1260: DFS와 BFS]] - DFS와 BFS를 함께 구현하는 문제
+- [[boj-11725|BOJ 11725: 트리의 부모 찾기]] - 트리에서 DFS를 활용하여 부모를 찾는 문제

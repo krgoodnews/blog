@@ -14,6 +14,11 @@ cover: static/cover.png
 - [[summer-was-ios-app|'여름이었다' iOS App]]
 - [[ITMS-90713-assets-xcassets-preview-content|ITMS-90713: Assets.xcassets는 Preview Content 디렉토리에 넣지 마라]]
 
+# 알고리즘 🧮
+
+- [[알고리즘-이론|📚 알고리즘 이론]]
+- [[알고리즘-문제|💻 알고리즘 문제 풀이]]
+
 # 회고 🖋
 
 - [[reading-coding-rest|독서와 개발, 훌륭한 휴식 (2020.06)]]
