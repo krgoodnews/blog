@@ -112,7 +112,30 @@ def generate_combinations(arr, m, current=[], start=0):
         current.pop()
 ```
 
-### 3. N-Queen 문제
+### 3. 비내림차순 조합 (중복 선택 가능)
+
+같은 수를 여러 번 선택할 수 있고, 비내림차순 조건을 만족하는 조합을 생성합니다.
+
+```python
+def generate_non_decreasing_combinations(arr, m, current=[], start=0):
+    # 기저 조건
+    if len(current) == m:
+        print(current)
+        return
+    
+    # start부터 시작 (비내림차순 보장)
+    for i in range(start, len(arr)):
+        current.append(arr[i])
+        generate_non_decreasing_combinations(arr, m, current, i)  # i부터 시작 (중복 선택 가능)
+        current.pop()
+```
+
+**핵심 포인트:**
+- `start` 파라미터로 비내림차순 보장
+- `i`부터 시작하여 같은 수를 여러 번 선택 가능
+- 정렬된 배열 사용 시 자동으로 사전순 출력
+
+### 4. N-Queen 문제
 
 N×N 체스판에 N개의 퀸을 서로 공격하지 않게 배치하는 문제입니다.
 
@@ -251,3 +274,5 @@ def generate_sequences_no_duplicate_v2(arr, m, current=[], used=[]):
 - 재귀 (Recursion)
 - [[boj-15654|BOJ 15654: N과 M (5)]] - 백트래킹을 활용하는 대표적인 문제
 - [[boj-15663|BOJ 15663: N과 M (9)]] - 중복 수열 처리가 필요한 백트래킹 문제
+- [[boj-15652|BOJ 15652: N과 M (4)]] - 비내림차순 조합 문제
+- [[boj-15666|BOJ 15666: N과 M (12)]] - 중복 원소가 있는 비내림차순 조합 문제
