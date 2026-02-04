@@ -1,6 +1,6 @@
 ---
 title: "LeetCode 36: Valid Sudoku"
-date: 2025-01-30
+date: 2026-01-30
 tags: [Algorithm, Python, LeetCode, Hash Set, Grid]
 ---
 

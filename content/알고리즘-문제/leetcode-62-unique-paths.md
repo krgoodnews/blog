@@ -1,6 +1,6 @@
 ---
 title: "LeetCode 62: Unique Paths"
-date: 2025-01-30
+date: 2026-01-30
 tags: [Algorithm, Python, LeetCode, Dynamic Programming, Grid]
 ---
 

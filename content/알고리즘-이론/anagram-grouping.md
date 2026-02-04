@@ -1,6 +1,6 @@
 ---
 title: "애너그램 그룹화 (Group Anagrams 원리)"
-date: 2025-01-30
+date: 2026-01-30
 tags: [Algorithm, Python, Hash, String, Sort]
 ---
 

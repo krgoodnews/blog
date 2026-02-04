@@ -1,6 +1,6 @@
 ---
 title: "그리드 경로 개수 세기 (Unique Paths 원리)"
-date: 2025-01-30
+date: 2026-01-30
 tags: [Algorithm, Python, Dynamic Programming, Grid]
 ---
 

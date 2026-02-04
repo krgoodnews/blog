@@ -1,6 +1,6 @@
 ---
 title: "스도쿠 유효성 검사 (Valid Sudoku 원리)"
-date: 2025-01-30
+date: 2026-01-30
 tags: [Algorithm, Python, Hash Set, Grid]
 ---
 
