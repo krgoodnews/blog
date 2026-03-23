@@ -5,7 +5,7 @@ tags: [Algorithm, Python, LeetCode, Hash, String]
 ---
 
 > [!note]
-> [[word-pattern-bijection|단어 패턴 일치 (Word Pattern · 전단사)]] 원리를 적용해, **길이·고유 개수·문자→단어 일관성**으로 판별하는 코드 구조를 설명합니다.
+> **pattern**의 각 문자와 **문자열 s**의 단어가 **일대일 대응(전단사)** 인지 판별하는 문제입니다. 해시맵(딕셔너리)을 사용하여 문자와 단어 사이의 매핑 관계를 추적합니다.
 
 ---
 
@@ -15,118 +15,84 @@ tags: [Algorithm, Python, LeetCode, Hash, String]
 
 ---
 
-## 문제 요약
+## 알고리즘 이론: 전단사(Bijection)와 단어 패턴 일치
 
-- **입력**: `pattern` (소문자 문자열), `s` (공백 하나로 구분된 단어들)
-- **출력**: pattern의 문자와 s의 단어가 **전단사**로 대응하면 true
-- **전단사**: 각 문자가 정확히 한 단어에, 각 단어가 정확히 한 문자에 대응
+문자열 $s$가 $pattern$을 따른다는 것은 $pattern$의 각 문자와 $s$의 각 단어 사이에 **전단사(Bijection)** 관계가 존재함을 의미합니다.
+
+### 전단사 성립 조건
+
+1. **일대일 대응 (One-to-One)**: 서로 다른 문자는 서로 다른 단어에 대응되어야 합니다. (여러 문자가 하나의 단어를 가리키면 안 됨)
+2. **일관성 (Consistency)**: 동일한 문자는 항상 동일한 단어에 대응되어야 합니다.
+3. **길이 일치**: $pattern$의 문자 개수와 $s$의 단어 개수가 정확히 일치해야 합니다.
+
+### 판별 전략
+
+- **길이 체크**: `len(pattern) == len(s.split())`
+- **매핑 일관성**: 딕셔너리를 사용하여 `문자 -> 단어` 매핑을 기록하고, 이미 존재하는 문자가 나올 때 이전과 동일한 단어인지 확인합니다.
+- **고유 개수 체크**: `len(set(pattern)) == len(set(words))` 조건을 통해 서로 다른 문자가 동일한 단어에 매핑되는 케이스를 효율적으로 걸러낼 수 있습니다. (전단사 성립의 핵심)
 
 ---
 
-## 전체 코드
+## 코드 구현
+
+### 전체 코드
 
 ```python
 class Solution:
     def wordPattern(self, pattern: str, s: str) -> bool:
-        lst_s = s.split(' ')
-        dic = {}
+        words = s.split(' ')
+        mapping = {}
 
-        if len(lst_s) != len(pattern):
+        # 1. 길이 검사
+        if len(words) != len(pattern):
             return False
 
-        if len(set(lst_s)) != len(set(list(pattern))):
+        # 2. 전단사 조건 검사 (고유 문자 수 == 고유 단어 수)
+        # 이 조건이 없으면 서로 다른 문자가 같은 단어를 가리키는 경우를 따로 체크해야 함
+        if len(set(words)) != len(set(list(pattern))):
             return False
 
+        # 3. 매핑 일관성 검사
         for i in range(len(pattern)):
-            p = pattern[i]
-            if p in dic:
-                if dic[p] != lst_s[i]:
+            char = pattern[i]
+            word = words[i]
+            
+            if char in mapping:
+                if mapping[char] != word:
                     return False
             else:
-                dic[p] = lst_s[i]
+                mapping[char] = word
 
         return True
 ```
 
 ---
 
-## 코드 구조 설명
+## 예시 분석: `pattern = "abba"`, `s = "dog cat cat dog"`
 
-### 1. 단어 리스트와 길이 검사
-
-```python
-lst_s = s.split(' ')
-dic = {}
-
-if len(lst_s) != len(pattern):
-    return False
-```
-
-- **lst_s**: s를 공백 기준으로 나눈 단어 리스트
-- **길이**가 다르면 문자와 단어를 일대일로 맞출 수 없으므로 False
+1. **길이**: 4 == 4 (통과)
+2. **고유 개수**: `set(pattern)`은 {'a', 'b'}로 2개, `set(words)`는 {'dog', 'cat'}으로 2개 (2 == 2 통과)
+3. **매핑 추적**:
+   - `i=0`: 'a' -> 'dog' 저장
+   - `i=1`: 'b' -> 'cat' 저장
+   - `i=2`: 'b'는 이미 있고 값이 'cat'으로 일치 (통과)
+   - `i=3`: 'a'는 이미 있고 값이 'dog'으로 일치 (통과)
+- **결과**: `True`
 
 ---
 
-### 2. 고유 문자 수 vs 고유 단어 수
+## 시간 및 공간 복잡도
 
-```python
-if len(set(lst_s)) != len(set(list(pattern))):
-    return False
-```
-
-- **set(pattern)**: pattern에서 서로 다른 문자의 개수
-- **set(lst_s)**: 서로 다른 단어의 개수
-- 두 개수가 다르면, “서로 다른 문자가 같은 단어를 가리키는” 경우나 그 반대가 생겨 **전단사가 불가능** → False
+- **시간 복잡도**: $O(N + M)$
+  - $N$은 패턴의 길이, $M$은 문자열 $s$의 길이입니다.
+  - 문자열 분리($O(M)$), 집합 생성 및 루프 순회($O(N)$)가 소요됩니다.
+- **공간 복잡도**: $O(K + W)$
+  - $K$는 고유 문자의 개수, $W$는 고유 단어의 개수입니다.
+  - 딕셔너리와 집합(Set)을 저장하는 데 사용됩니다.
 
 ---
 
-### 3. 문자 → 단어 매핑 일관성
+## 관련 알고리즘
 
-```python
-for i in range(len(pattern)):
-    p = pattern[i]
-    if p in dic:
-        if dic[p] != lst_s[i]:
-            return False
-    else:
-        dic[p] = lst_s[i]
-
-return True
-```
-
-- **dic**: 문자 `p` → 대응 단어
-- **p가 이미 있으면**: 이전에 정한 단어 `dic[p]`와 현재 단어 `lst_s[i]`가 같아야 함 (다르면 False)
-- **p가 없으면**: `dic[p] = lst_s[i]` 로 매핑 추가
-- 위에서 set 개수를 맞춰 두었으므로, “서로 다른 문자가 같은 단어를 가리키는” 경우는 발생하지 않음
-
----
-
-## 데이터 흐름 요약
-
-| 단계 | 역할 |
-|------|------|
-| lst_s | s를 공백으로 나눈 단어 리스트 |
-| len(lst_s) == len(pattern) | 대응 가능한 길이인지 |
-| len(set(lst_s)) == len(set(pattern)) | 전단사 가능한 고유 개수인지 |
-| dic | 문자 → 단어 매핑, 같은 문자는 항상 같은 단어 |
-
----
-
-## 예시: pattern = "abba", s = "dog cat cat dog"
-
-- lst_s = ["dog","cat","cat","dog"], 길이 4 == 4
-- set(pattern) 2개, set(lst_s) 2개 → 통과
-- a→dog, b→cat, b→cat(일치), a→dog(일치) → **True**
-
----
-
-## 시간·공간 복잡도
-
-- **시간**: O(n + m) — split O(m), set/순회 O(n), n = len(pattern), m = len(s)
-- **공간**: O(n) — 단어 리스트, set, 딕셔너리
-
----
-
-## 관련 문서
-
-- [[word-pattern-bijection|단어 패턴 일치 (Word Pattern · 전단사)]]
+- 해시맵 (HashMap)
+- 문자열 처리 (String Manipulation)
