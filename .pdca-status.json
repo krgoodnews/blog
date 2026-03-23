@@ -1,0 +1,48 @@
+{
+  "version": "2.0",
+  "lastUpdated": "2026-03-23T04:57:07.248Z",
+  "activeFeatures": [],
+  "primaryFeature": null,
+  "features": {
+    "알고리즘-포스트-통폐합-및-태그-체계-개선": {
+      "phase": "Report",
+      "status": "Completed",
+      "planPath": "docs/01-plan/features/알고리즘-포스트-통폐합-및-태그-체계-개선.plan.md",
+      "designPath": "docs/02-design/features/알고리즘-포스트-통폐합-및-태그-체계-개선.design.md",
+      "analysisPath": "docs/03-analysis/알고리즘-포스트-통폐합-및-태그-체계-개선.analysis.md",
+      "reportPath": "docs/04-report/알고리즘-포스트-통폐합-및-태그-체계-개선.report.md",
+      "matchRate": 94
+    }
+  },
+  "pipeline": {
+    "currentPhase": 5,
+    "level": "Starter",
+    "phaseHistory": [
+      {
+        "phase": 1,
+        "name": "Plan",
+        "completedAt": "2026-03-15T11:45:00.000Z"
+      },
+      {
+        "phase": 2,
+        "name": "Design",
+        "completedAt": "2026-03-15T11:55:00.000Z"
+      },
+      {
+        "phase": 3,
+        "name": "Do",
+        "completedAt": "2026-03-15T12:15:00.000Z"
+      },
+      {
+        "phase": 4,
+        "name": "Check",
+        "completedAt": "2026-03-15T12:25:00.000Z"
+      }
+    ]
+  },
+  "session": {
+    "startedAt": "2026-03-15T11:41:27.650Z",
+    "onboardingCompleted": true,
+    "lastActivity": "2026-03-15T12:35:00.000Z"
+  }
+}
