@@ -5,7 +5,7 @@ cover: static/cover.png
 
 # 공학도 출신답게 살아보자 🛠️
 
-> **📌 최신 글**: [[pedal-workflow-for-ai-agents|AI Agent에게 구조를 주면, 비싼 모델이 필요 없다 — PEDAL 워크플로]]
+> **📌 최신 글**: [[pedal-workflow-for-ai-agents|AI Agent에게 구조를 주면, 더 나은 연비로 갈 수 있다 — PEDAL 워크플로]]
 
 # 생각 🤔
 
